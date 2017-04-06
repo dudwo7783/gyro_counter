@@ -11,6 +11,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.UUID;
 
 /**
@@ -23,7 +25,7 @@ public class BluetoothService {
 
     // Intent request code
     private static final int REQUEST_CONNECT_DEVICE = 1;
-    private final static int REQUEST_ENABLE_BT = 1;
+    private final static int REQUEST_ENABLE_BT = 2;
 
     private Activity mActivity;
     private Handler mHandler;
@@ -337,12 +339,22 @@ public class BluetoothService {
             byte[] buffer = new byte[1024];
             int bytes;
 
+            try {
+                mmOutStream.write(1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             // Keep listening to the InputStream while connected
             while (true) {
                 try {
                     // InputStream
-                    bytes = mmInStream.read(buffer);
+                    mmInStream.read(buffer);
+                    mHandler.sendEmptyMessage(0);
+                    bytes = byteToint(buffer);
+
                     Log.d("BLUETOOTH",String.valueOf(bytes));
+
 
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
@@ -360,7 +372,7 @@ public class BluetoothService {
          */
         public void write(byte[] buffer) {
             try {
-                // °ªÀ» ¾²´Â ºÎºÐ(°ªÀ» º¸³½´Ù)
+                //
                 mmOutStream.write(buffer);
 
             } catch (IOException e) {
@@ -375,6 +387,13 @@ public class BluetoothService {
                 Log.e(TAG, "close() of connect socket failed", e);
             }
         }
+    }
+    public int byteToint(byte[] Value){
+        ByteBuffer buff = ByteBuffer.allocate(4);
+        buff = ByteBuffer.wrap(Value);
+
+        buff.order(ByteOrder.LITTLE_ENDIAN);
+        return  buff.getInt();
     }
 
 
