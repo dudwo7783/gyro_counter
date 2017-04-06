@@ -42,18 +42,18 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     public void onClick(View v) {
         int i = v.getId();
-        Log.d("MAIN","second");
+        
         if (i == R.id.sign_out_button) {
             signOut();
             Intent intent = new Intent(this, EmailPasswordActivity.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.anim01, R.anim.anim02);
             finish();
         }
         else if (i == R.id.add_work) {
-            Log.d("MAIN","first");
             Intent intent = new Intent(this, AddWork.class);
-            Log.d("MAIN","first");
             startActivity(intent);
+            overridePendingTransition(R.anim.anim01, R.anim.anim02);
             finish();
         }
 
