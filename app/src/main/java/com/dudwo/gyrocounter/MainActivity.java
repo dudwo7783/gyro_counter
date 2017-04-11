@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
         findViewById(R.id.sign_out_button).setOnClickListener(this);
         findViewById(R.id.add_work).setOnClickListener(this);
+        findViewById(R.id.run).setOnClickListener(this);
 
 
         if(user != null){
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     public void onClick(View v) {
         int i = v.getId();
-        
+
         if (i == R.id.sign_out_button) {
             signOut();
             Intent intent = new Intent(this, EmailPasswordActivity.class);
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         }
         else if (i == R.id.add_work) {
             Intent intent = new Intent(this, AddWork.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.anim01, R.anim.anim02);
+            finish();
+        }
+        else if (i == R.id.run) {
+            Intent intent = new Intent(this, SetRunActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.anim01, R.anim.anim02);
             finish();

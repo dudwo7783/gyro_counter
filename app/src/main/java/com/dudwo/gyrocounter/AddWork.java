@@ -131,9 +131,11 @@ public class AddWork extends BaseActivity implements View.OnClickListener {
             if (btService.getDeviceState()) {
                 // 블루투스가 지원 가능한 기기일 때
                 btService.enableBluetooth();
+                btService.write("a".getBytes());
             } else {
                 finish();
             }
         }
     }
 }
+

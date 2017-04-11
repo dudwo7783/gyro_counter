@@ -213,6 +213,7 @@ public class BluetoothService {
                 return;
             r = mConnectedThread;
         } // Perform the write unsynchronized r.write(out); }
+        r.write(out);
     }
 
     // ¿¬°á ½ÇÆÐÇßÀ»¶§
@@ -263,7 +264,7 @@ public class BluetoothService {
         }
 
         public void run() {
-            Log.i(TAG, "BEGIN mConnectThread");
+            Log.i(TAG, "BEGIN mConnectThread1");
             setName("ConnectThread");
 
             // ¿¬°áÀ» ½ÃµµÇÏ±â Àü¿¡´Â Ç×»ó ±â±â °Ë»öÀ» ÁßÁöÇÑ´Ù.
@@ -335,16 +336,16 @@ public class BluetoothService {
         }
 
         public void run() {
-            Log.i(TAG, "BEGIN mConnectedThread");
+            Log.i(TAG, "BEGIN mConnectedThread2");
             byte[] buffer = new byte[1024];
             int bytes;
-
+/*
             try {
                 mmOutStream.write(1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+*/
             // Keep listening to the InputStream while connected
             while (true) {
                 try {

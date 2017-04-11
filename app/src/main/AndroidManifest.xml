@@ -23,9 +23,12 @@
         <activity android:name=".BaseActivity" />
         <activity android:name=".EmailPasswordActivity" />
         <activity android:name=".AddWork" />
-        <activity android:name=".DeviceListActivity" android:theme="@android:style/Theme.DeviceDefault.Dialog" />
-        <activity android:name=".MeasureValue"></activity>
-
+        <activity
+            android:name=".DeviceListActivity"
+            android:theme="@android:style/Theme.DeviceDefault.Dialog" />
+        <activity android:name=".MeasureValue" />
+        <activity android:name=".RunActivity" />
+        <activity android:name=".SetRunActivity"></activity>
     </application>
 
 </manifest>
