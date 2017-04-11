@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,8 +81,14 @@ public class AddWork extends BaseActivity implements View.OnClickListener {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Intent intent = new Intent("BLUETOOTH");
+            intent.putExtra("value", Integer.parseInt(String.valueOf(msg.what)));
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+            //Log.d("HANDLER",String.valueOf(msg.what));
         }
     };
+
+
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -131,6 +138,7 @@ public class AddWork extends BaseActivity implements View.OnClickListener {
             if (btService.getDeviceState()) {
                 // 블루투스가 지원 가능한 기기일 때
                 btService.enableBluetooth();
+                Log.d("AAAA","AAAA");
                 btService.write("a".getBytes());
             } else {
                 finish();

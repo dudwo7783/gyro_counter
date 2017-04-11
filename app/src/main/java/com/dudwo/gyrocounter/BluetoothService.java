@@ -26,7 +26,6 @@ public class BluetoothService {
     // Intent request code
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private final static int REQUEST_ENABLE_BT = 2;
-
     private Activity mActivity;
     private Handler mHandler;
 
@@ -351,11 +350,10 @@ public class BluetoothService {
                 try {
                     // InputStream
                     mmInStream.read(buffer);
-                    mHandler.sendEmptyMessage(0);
                     bytes = byteToint(buffer);
 
                     Log.d("BLUETOOTH",String.valueOf(bytes));
-
+                    mHandler.sendEmptyMessage(bytes);
 
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);

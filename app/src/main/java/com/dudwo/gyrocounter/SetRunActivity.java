@@ -30,7 +30,7 @@ import java.util.Map;
 
 import static android.R.attr.data;
 
-public class SetRunActivity extends BaseActivity {
+public class SetRunActivity extends BaseActivity  implements View.OnClickListener{
     private static final String TAG = "NewPostActivity";
 
     private FirebaseAuth firebaseAuth;
@@ -40,7 +40,6 @@ public class SetRunActivity extends BaseActivity {
     DatabaseReference dbref;
 
     private Iterator<DataSnapshot> category;
-
     private ArrayList<Work> WorkList;
 
 
@@ -48,7 +47,8 @@ public class SetRunActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_run);
-        Log.d(TAG, "AAAAAAAAAAAAAAAAAAAAA");
+
+        findViewById(R.id.run_btn).setOnClickListener(this);
 
 
         // WorkList = new ArrayList<Map<String,Object>>();
@@ -120,5 +120,17 @@ public class SetRunActivity extends BaseActivity {
             }
         }) ;
         */
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+
+        if (i == R.id.run_btn) {
+            Intent intent = new Intent(this, RunActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 }
